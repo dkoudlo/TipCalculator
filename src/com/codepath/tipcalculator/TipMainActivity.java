@@ -31,27 +31,26 @@ public class TipMainActivity extends Activity {
         tipPercent = 0;
         
         button10.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				tipPercent = 0.1;
-				
+				calculateTip();
 			}
 		});
         
         button15.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				tipPercent = 0.15;
+				calculateTip();
 			}
 		});
         
         button20.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				tipPercent = 0.2;
+				calculateTip();
 			}
 		});
         
@@ -66,7 +65,6 @@ public class TipMainActivity extends Activity {
 				}
 			}
 			
-
 			@Override
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 					int arg3) {
@@ -83,9 +81,13 @@ public class TipMainActivity extends Activity {
     }
 
     public void calculateTip() {
-    	double totalBill = Double.parseDouble(billAmmount.getText().toString());
-    	double tip = totalBill * tipPercent;
-    	tipTotal.setText(defaultTipText + Double.toString(tip));
+    	if(billAmmount.getText().length() > 0){
+    		double totalBill = Double.parseDouble(billAmmount.getText().toString());
+    		if(totalBill > 0){
+    	    	double tip = totalBill * tipPercent;
+    	    	tipTotal.setText(defaultTipText + String.format("%.2f", tip));
+        	}
+    	}
 	}
 
     @Override
